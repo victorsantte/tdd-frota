@@ -10,6 +10,9 @@ function verificarBloqueio(veiculo, hoje = new Date()) {
   if (veiculo.osPendentes > 0) {
     motivos.push('Ordem de serviço pendente');
   }
+  if (new Date(veiculo.vencimentoApolice) < hoje) {
+    motivos.push('Apólice de seguro vencida');
+  }
 
   return { bloqueado: motivos.length > 0, motivos };
 }
