@@ -36,3 +36,10 @@ describe('RF-12 - Bloqueio de veículos (comportamento original)', () => {
       .toThrow('Veículo bloqueado');
   });
 });
+describe('RF-12-A - Bloqueio por apólice de seguro vencida (novo comportamento)', () => {
+  test('bloqueia veículo com apólice de seguro vencida', () => {
+    const r = verificarBloqueio({ ...veiculoOk, vencimentoApolice: '2026-01-01' }, HOJE);
+    expect(r.bloqueado).toBe(true);
+    expect(r.motivos).toContain('Apólice de seguro vencida');
+  });
+});
